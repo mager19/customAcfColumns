@@ -48,7 +48,11 @@ if (!class_exists('CustomACFColumns')) {
 
         public function deactivate() {}
 
-        public function uninstall() {}
+        public static function uninstall()
+        {
+            delete_option('selected_cpt');
+            delete_option('selected_field');
+        }
     }
 }
 

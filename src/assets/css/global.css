@@ -1,0 +1,17 @@
+:root {
+	--size-small: 1rem;
+	--size-medium: 4rem;
+	--size-large: 8rem;
+}
+
+.top-small {
+	margin-top: var(--size-small);
+}
+
+.top-medium {
+	margin-top: var(--size-medium);
+}
+
+.top-large {
+	margin-top: var(--size-large);
+}
