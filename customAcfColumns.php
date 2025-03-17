@@ -21,7 +21,48 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+require_once __DIR__ . '/vendor/autoload.php';
 
-define('CCM_VERSION', '1.0.0');
-define('CCM_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('CCM_PLUGIN_URL', plugin_dir_url(__FILE__));
+use Mager19\CustomAcfColumns\admin\CAC_Admin;
+
+
+if (!class_exists('CustomACFColumns')) {
+    class CustomACFColumns
+    {
+
+        public function __construct()
+        {
+            $this->define_constants();
+        }
+
+
+        // Define constants_a
+        public function define_constants()
+        {
+            define('CAC_VERSION', '1.0.1');
+            define('CAC_PLUGIN_DIR', plugin_dir_path(__FILE__));
+            define('CAC_PLUGIN_URL', plugin_dir_url(__FILE__));
+        }
+
+        public function activate() {}
+
+        public function deactivate() {}
+
+        public static function uninstall()
+        {
+            delete_option('selected_cpt');
+            delete_option('selected_field');
+        }
+    }
+}
+
+if (class_exists('CustomACFColumns')) {
+    $customACFColumns = new CustomACFColumns();
+    register_activation_hook(__FILE__, [$customACFColumns, 'activate']);
+    register_deactivation_hook(__FILE__, [$customACFColumns, 'deactivate']);
+    register_uninstall_hook(__FILE__, [$customACFColumns, 'uninstall']);
+
+    if (is_admin()) {
+        new CAC_Admin();
+    }
+}

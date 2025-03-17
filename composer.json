@@ -1,0 +1,15 @@
+{
+	"name": "mager19/custom-acf-columns",
+	"autoload": {
+		"psr-4": {
+			"Mager19\\CustomAcfColumns\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "mager19",
+			"email": "mager19@gmail.com"
+		}
+	],
+	"require": {}
+}
