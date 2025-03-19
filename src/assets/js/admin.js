@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('message').innerHTML = '<p>Error loading fields</p>';
+                    document.getElementById('message').innerHTML = '';
                 });
         } else {
             document.getElementById('field_row').style.display = 'none';

@@ -50,6 +50,7 @@ if (!class_exists('CustomACFColumns')) {
 
         public static function uninstall()
         {
+            //Todo: remove options and admin page            
             delete_option('selected_cpt');
             delete_option('selected_field');
         }

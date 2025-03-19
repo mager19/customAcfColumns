@@ -22,6 +22,7 @@ class CAC_Admin
         add_action('admin_menu', array($this, 'CAC_Admin_Page'));
         add_action('wp_ajax_get_fields', array($this, 'get_fields'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+        add_action('init', array($this, 'initialize_columns'));
     }
 
     /**
@@ -65,7 +66,7 @@ class CAC_Admin
         );
 
         // Enqueue the script
-        wp_enqueue_script('admin-js');
+        // wp_enqueue_script('admin-js');
     }
 
     /**
@@ -185,6 +186,7 @@ class CAC_Admin
         $fieldDetector = new CAC_FieldDetector($cpt);
         $fields = $fieldDetector->get_all_fields();
 
+        //Todo: determinar que pasa con fields que no son text. cuales se van a aceptar?
 
         if (empty($fields)) {
             $message = 'No fields found';
@@ -214,7 +216,7 @@ class CAC_Admin
                 $selected_acf = sanitize_text_field($_POST['field_select']);
                 update_option('selected_acf', $selected_acf);
                 $message = '<p>Campo ACF seleccionado: ' . esc_html($selected_acf) . '</p>';
-                // CAC_Notice::display_notice($message, $type);
+                CAC_Notice::display_notice($message, $type);
             }
         }
 
@@ -223,6 +225,17 @@ class CAC_Admin
             delete_option('selected_cpt');
             delete_option('selected_acf');
             echo '<div class="notice notice-success"><p>Las opciones han sido reiniciadas correctamente.</p></div>';
+        }
+    }
+
+    public function initialize_columns()
+    {
+        $selected_cpt = get_option('selected_cpt');
+        $selected_acf = get_option('selected_acf');
+
+        if (!empty($selected_cpt) && !empty($selected_acf)) {
+            // Instance column manager
+            new CAC_Columns_Manager($selected_cpt, $selected_acf);
         }
     }
 }

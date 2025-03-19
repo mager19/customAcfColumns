@@ -20,3 +20,15 @@ and the file index.php - Silence is golden
   require_once **DIR** . '/vendor/autoload.php';
 
 ## Create a class for the admin page
+
+- Create admin page
+- Create all function to display info and layout on admin
+
+## Improvements
+
+- ajax en archivo aparte
+- revisión del tipo de field y ajustar el ordenamiento con numeros=
+- plugin check para repo
+- sistema de distrubución de actualizaciones
+- Documentación
+- Filtro select/dropdown en la vista de cpt

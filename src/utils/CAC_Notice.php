@@ -27,7 +27,12 @@ class CAC_Notice
     public static function display_notice($message, $type = 'error')
     {
         $screen = get_current_screen();
-        if ($screen->id !== 'tools_page_custom-acf-columns') {
+
+        if (!$screen) {
+            return;
+        }
+
+        if ($screen->id && $screen->id !== 'tools_page_custom-acf-columns') {
             return;
         }
 
